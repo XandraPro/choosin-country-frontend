@@ -1,19 +1,19 @@
-import {  useState} from "react";
+import {  useState } from "react";
 import { AuthContext } from "./auth.context";
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => {
-    return localStorage.getItem("token") || null;
+    localStorage.getItem("token")
   });
 
   const login = (newToken) => {
-    setToken(newToken);
     localStorage.setItem("token", newToken);
+    setToken(newToken);
   };
 
   const logout = () => {
-    setToken(null);
     localStorage.removeItem("token");
+    setToken(null);
   };
 
   return (

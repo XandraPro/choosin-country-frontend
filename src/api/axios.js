@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: "https://choosin-country-backend.onrender.com/api"
+const api = axios.create({
+  baseURL: "https://choosin-country-backend.onrender.com/api",
   });
 
-export default instance;
+export default api;

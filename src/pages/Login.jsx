@@ -23,11 +23,12 @@ function Login() {
     setError("");
 
     try {
-      const userData = await loginUser(formData);
-      login(userData.token);
+      const data = await loginUser(formData);
+      login(data.token);
       navigate("/dashboard");
     } catch (err) {
-      setError(err.message || "Login failed. Please try again.");
+      console.error(err);
+      setError("Invalid email or password");
     }
   };
 
@@ -42,7 +43,6 @@ function Login() {
         type="email"
         name="email"
         placeholder="Email"
-        value={formData.email}
         onChange={handleChange}
         required
       />
@@ -51,7 +51,6 @@ function Login() {
         type="password"
         name="password"
         placeholder="Password"
-        value={formData.password}
         onChange={handleChange}
         required
       />
