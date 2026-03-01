@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { getSongs, createSong} from "../services/songs.service";
 import { searchiTunes } from "../services/itunes.service";
-
+import logo from "../assets/logo.png";
 
 
 function Dashboard() {
@@ -89,6 +89,7 @@ function Dashboard() {
 */
     return (
         <div style={{ padding: "20px" }}>
+          <img src={logo} alt="Choosin' Country Logo" style={{ width: "300px", marginBottom: "20px" }} />
             <h1>Choosin' Country Dashboard</h1>
             <button onClick={logout}>Logout</button>
             <hr />

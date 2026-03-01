@@ -1,0 +1,115 @@
+body {
+    background-color: #1A120B;
+    color: #F1E3C6;
+    font-family: 'Georgia', serif;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px;
+}
+
+h1 {
+    font-size: 36px;
+    color: #F4A261;
+    margin-bottom: 10px;
+}
+.section-title {
+    font-size: 22px;
+    color: #F4A261;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    width: 300px;
+    background-color: #4B2E1E;
+    color: #F1E3C6
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: #F4A261;
+    color: #1A120B;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.song-card {
+    background-color: #4B2E1E;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #8B5E3C;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.song-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0px 15px rgba(244, 162, 97, 0.4);
+}
+
+.song-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.song-card h4 {
+    margin: 10px 0 5px;
+    color: #F4A261;
+}
+
+.song-card p {
+    font-size: 14px;
+    color: #F1E3C6;
+}
+
+.song-card button {
+    margin-top: 8px;
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.song-card input {
+    margin-top: 8px;
+    padding: 6px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    background-color: #8B5E3C;
+    color: white;
+}
+
+.save-btn {
+    background-color: #F4A261;
+    color: #1A120B;
+}
+
+.delete-btn {
+    background-color: #8B5E3C;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.9;
+}
