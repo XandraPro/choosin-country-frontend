@@ -16,13 +16,12 @@ function Trending() {
     return (
         <div>
             <h2>Trending Songs</h2>
-            <ul>
+            
                 {songs.map((song) => (
-                    <li key={song._id}>
-                        {song.title} by {song.artist} - Plays: {song.playsCount}, Saves: {song.savesCount}
-                    </li>
+                    <div key={song._id}>
+                        <p>{song.title} by {song.artist} - Plays: {song.playsCount}, Saves: {song.savesCount}</p>
+                    </div>
                 ))}
-            </ul>
         </div>
     );
 }

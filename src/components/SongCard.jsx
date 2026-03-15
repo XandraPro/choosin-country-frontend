@@ -1,33 +1,44 @@
-import { saveSong, playSong } from '../api/songs';
+import { useState } from 'react';
+import { saveSong} from '../api/songs';
 
 function SongCard({ song }) {
-    const handleSave = () => {
-        saveSong({
-            trackId: song.trackId,
-            title: song.songTitle,
-            artist: song.artist,
+
+    const[comment, setComment] = useState("");
+    const[saved, setSaved] = useState(false);
+
+    const handleSave = async () => {
+        const songData = {
+            title:song.trackName,
+            artist: song.artisName,
             artwork: song.artwork,
-            previewUrl: song.previewUrl,
-        });
+            preview: song.previewUrl,
+            comment: comment
+        };
+        try {
+            await saveSong(songData);
+            setSaved(true);
+        } catch (error) {
+            console.error("Error saving song:", error);
+        }
     };
 
-    const handlePlay = () => {
-        playSong(song.previewUrl);  
-        };
-
     return (
-        <div className="song-card">
-            <img src={song.artwork} />
+        <div className='song-card'>
+            <img src={song.artwork} alt={song.trackName} />
+            <h4>{song.trackName}</h4>
+            <p>{song.artisName}</p>
+            <audio controls src={song.previewUrl}></audio>
 
-            <h4>{song.songTitle}</h4>
-            <p>{song.artist}</p>
-
-            <audio controls src={song.previewUrl} onPlay={handlePlay}/>
-
-            <button onClick={handleSave}>Save Song</button>
+            <input>
+                type="text"
+                placeholder="Write your comment"
+                value={comment}
+                onChage(e)={(e) => setComment(e.target.value)}
+            </input>
+            <button onClick={handleSave}>
+                {saved ? "Saved" : "Save song"}
+            </button>
         </div>
     );
 }
-
 export default SongCard;
-            
