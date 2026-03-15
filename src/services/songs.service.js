@@ -1,31 +1,17 @@
-import api from "../api/axios";
+import api from '../api/axios';
 
-// get token from local storage
-const getAuthHeaders = () => {
-  const token = localStorage.getItem("token");
-  return {  Authorization: `Bearer ${token}` };
+export const saveSong = async (songData) => {
+    return api.post('/songs', songData);
 };
 
-// get all songs
-export const getSongs = async () => {
-  const response = await api.get("/songs", { headers: getAuthHeaders() });
-  return response.data;
+export const playSong = (id) => {
+    return api.get(`/songs/${id}/play`);
 };
 
-// create a new song
-export const createSong = async (songData) => {
-  const response = await api.post("/songs", songData, { headers: getAuthHeaders() });
-  return response.data;
+export const getTrendingSongs = () => {
+    return api.get('/songs/trending');
 };
 
-// update a song
-export const updateSong = async (id, songData) => {
-  const response = await api.put(`/songs/${id}`, songData, { headers: getAuthHeaders() });
-  return response.data;
+export const getRanking = () => {
+    return api.get('/songs/ranking');
 };
-
-// delete a song
-export const deleteSong = async (id) => {
-  const response = await api.delete(`/songs/${id}`, { headers: getAuthHeaders() });
-  return response.data;
-};  

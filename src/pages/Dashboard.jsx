@@ -1,142 +1,146 @@
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../context/auth.context";
-import { getSongs, createSong} from "../services/songs.service";
-import { searchiTunes } from "../services/itunes.service";
-import logo from "../assets/logo.png";
+import { useState, useEffect } from "react";
+import { searchItunes } from "../services/itunes.service"
+import {
+ saveSong,
+ getTopSongs,
+ voteSong,
+} from "../services/songs.service";
+import { useAuth } from "../context/AuthContext";
+import Player from "../components/Player";
 
+export default function Dashboard() {
+ const { logout } = useAuth();
 
-function Dashboard() {
-    const { logout } = useContext(AuthContext);
+ const [query, setQuery] = useState("");
+ const [results, setResults] = useState([]);
+ const [comment, setComment] = useState("");
+ const [topSongs, setTopSongs] = useState([]);
+ const [currentSong, setCurrentSong] = useState(null);
 
-    const [songs, setSongs] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [itunesResults, setItunesResults] = useState([]);
-    const [comment, setComment] = useState("");
-    const [error] = useState("");
-    
+ // buscar canciones
+ const handleSearch = async (e) => {
+   e.preventDefault();
 
-    // Fetch songs on component mount
-    useEffect(() => {
-         getSongs();
-    }, []);
+   const songs = await searchItunes(query);
+   setResults(songs);
+ };
 
-    // Load songs from the backend
-    const loadSongs = async () => {
-      const data = await getSongs();
-      setSongs(data);
-    };
+ // guardar canción
+ const handleSave = async (song) => {
+   await saveSong({
+     title: song.title,
+     artist: song.artist,
+     artwork: song.artworkUrl,
+     preview: song.previewUrl,
+     comment,
+   });
 
-    // Handle searching for songs on iTunes
-    const handleSearchSongs = async () => {
-      const results = await searchiTunes(searchTerm);
-      setItunesResults(results);
-    };
+   alert("Song saved!");
+   loadTopSongs();
+ };
 
-    /*
-    // Handle creating a new song
-    const handleCreateSong = async () => {
-        if (!newSong) return;
-        try {
-            await createSong({ title: newSong });
-            setNewSong("");
-            loadSongs();
-        } catch (err) {
-            console.error(err);
-            setError("Failed to create song");      
-        }
-    };
-    */
-   
-    // Handle creating a new song with iTunes search
-    const handleCreateSong = async (song) => {
-      await createSong({ title: song.trackName, artist: song.artistName, comment });
-      setComment("");
-      loadSongs();
-    };
-   
-/*
-    // Handle updating a song
-    const handleUpdateSong = async (id) => {
-     try {
-        await updateSong(id, { title: editingSongTitle, artist: editingArtist, comment: editingComment });
-        setEditingSongId(null); 
-        loadSongs();
-     } catch (err) {
-        console.error(err);
-        setError("Failed to update song");
-     }
-    };  
+ // votar canción
+ const handleVote = async (id) => {
+   await voteSong(id);
+   loadTopSongs();
+ };
 
-    // Handle deleting a song
-    const handleDeleteSong = async (id) => {
-        if (!window.confirm("Are you sure you want to delete this song?")) return;
-        try {
-            await deleteSong(id);
-            loadSongs();
-        } catch (err) {
-            console.error(err);
-            setError("Failed to delete song");
-        }
-    };
+ const loadTopSongs = async () => {
+   const songs = await getTopSongs();
+   setTopSongs(songs);
+ };
 
-    // Handle canceling edit mode
-    const handleCancelEdit = () => {
-        setEditingSongId(null);
-        setEditingSongTitle("");
-        setEditingArtist("");
-        setEditingComment("");
-    };  
-*/
-    return (
-        <div style={{ padding: "20px" }}>
-          <img src={logo} alt="Choosin' Country Logo" style={{ width: "300px", marginBottom: "20px" }} />
-            <h1>Choosin' Country Dashboard</h1>
-            <button onClick={logout}>Logout</button>
-            <hr />
+ useEffect(() => {
+   loadTopSongs();
+ }, []);
 
-            {error && <p style={{ color: "red" }}>{error}</p>}
+ return (
+   <div className="dashboard">
 
-            <h2>Search country songs on iTunes</h2>
-            <div style={{ marginTop: "20px" }}>
-                <input 
-                    type="text"
-                    placeholder="Search for a song or artist"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)} 
-                />
-                <button onClick={handleSearchSongs}>Search Song</button>
-            </div>
+     <header className="header">
+       <h1>Country Music Hub</h1>
+       <button onClick={logout}>Logout</button>
+     </header>
 
-            <div>
-              {itunesResults.map((song) => (  
-                <div key={song.trackId} style={{ border: "1px solid #ccc", padding: "10px", marginTop: "10px" }}>
-                  <h3>{song.trackName} - {song.artistName}</h3>
-                  <p><strong>Album:</strong> {song.collectionName}</p>
-                  <p><strong>Genre:</strong> {song.primaryGenreName}</p>
-                  <textarea 
-                    placeholder="Add a comment about this song"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    style={{ width: "100%", height: "60px", marginTop: "10px" }}
-                  />
-                  <button onClick={() => handleCreateSong(song)} style={{ marginTop: "10px" }}>Add to My Songs</button>
-                </div>
-              ))}   
-            </div>
+     {/* BUSCADOR */}
+     <section className="search">
 
-            <hr />
+       <h2>Search Country Songs</h2>
 
-            <h2>My Country Songs</h2>
-            <div>
-              {songs.map((song) => (
-                <div key={song._id} style={{ border: "1px solid #ccc", padding: "10px", marginTop: "10px" }}>
-                  <h3>{song.title} - {song.artist}</h3>
-                  <p><strong>Comment:</strong> {song.comment}</p>
-                </div>
-              ))}   
-            </div>
-        </div>
-    );
+       <form onSubmit={handleSearch}>
+         <input
+           type="text"
+           placeholder="Search artist or song"
+           value={query}
+           onChange={(e) => setQuery(e.target.value)}
+         />
+
+         <button type="submit">Search</button>
+       </form>
+
+     </section>
+
+     {/* RESULTADOS ITUNES */}
+     <section className="results">
+
+       {results.map((song) => (
+         <div key={song.trackId} className="songCard">
+
+           <img src={song.artworkUrl100} alt={song.trackName} />
+
+           <h3>{song.trackName}</h3>
+
+           <p>{song.artistName}</p>
+
+           <audio controls src={song.previewUrl}></audio>
+           <button onClick={() => setCurrentSong(song)}>
+             Open Player
+           </button>
+
+           <textarea
+             placeholder="Add a comment"
+             onChange={(e) => setComment(e.target.value)}
+           />
+
+           <button onClick={() => handleSave(song)}>
+             Save Song
+           </button>
+
+         </div>
+       ))}
+
+     </section>
+
+     {/* TOP 10 */}
+     <section className="topSongs">
+
+       <h2>Top Country Songs</h2>
+
+       {topSongs.map((song) => (
+         <div key={song._id} className="topSong">
+
+           <img src={song.artwork} alt={song.title} />
+
+           <div>
+
+             <h3>{song.title}</h3>
+
+             <p>{song.artist}</p>
+
+             <p>Votes: {song.score}</p>
+
+             <button onClick={() => handleVote(song._id)}>
+               Vote
+             </button>
+
+           </div>
+
+         </div>
+       ))}
+
+     </section>
+    <Player song={currentSong}/>
+   </div>
+ );
+ 
 }
-
-export default Dashboard;

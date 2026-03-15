@@ -1,14 +1,9 @@
-import axios from 'axios';
 
-export const searchiTunes = async (term) => {
-    const response = await axios.get(`https://itunes.apple.com/search`,
-        {
-            params: {
-                term,
-                media: 'music',
-                limit: 10,
-            },
-        }
-    );
-    return response.data.results;
-};  
+export const searchItunes= async (query => {
+
+    const response = await fetch('https://itunes.apple.com/search?term=${query}&media=music&limit=10');
+
+    const data = await response.data;
+
+    return data.results;
+});
