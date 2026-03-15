@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getTrendingSongs } from "../services/song.service";
+import { getTrendingSongs } from "../services/songs.service";
 
 function Trending() {
     const [songs, setSongs] = useState([]);
