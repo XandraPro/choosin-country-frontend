@@ -1,0 +1,96 @@
+/* Container */
+.home {
+ background: radial-gradient(circle at top, #3E2A1C, #000);
+ color: var(--text-color);
+ min-height: 100vh;
+}
+
+/* Hero*/
+.hero {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 80px 100px; /* 🔥 margen lateral */
+ gap: 40px;
+}
+
+/* Text */
+.hero-text {
+ max-width: 500px;
+}
+
+.hero h1 {
+ font-size: 48px;
+ color: var(--primary-color);
+ text-shadow: 0 0 15px rgba(244,162,97,0.5);
+}
+
+.hero p {
+ margin: 20px 0;
+ font-size: 18px;
+ line-height: 1.5;
+ color: #e8d8c3;
+}
+
+/* BOTÓN */
+.hero button {
+ padding: 12px 22px;
+ background: linear-gradient(135deg, #F4A261, #E76F51);
+ border: none;
+ border-radius: 8px;
+ cursor: pointer;
+ font-weight: bold;
+ color: #000;
+ transition: 0.3s;
+}
+
+.hero button:hover {
+ transform: scale(1.05);
+ box-shadow: 0 0 20px rgba(244,162,97,0.6);
+}
+
+/* Logo🔥 */
+.hero-logo {
+ width: 220px;              /* 🔥 más pequeño */
+ border-radius: 20px;
+ box-shadow: 0 0 40px rgba(244,162,97,0.4);
+ background-color: transparent; /* 🔥 quita fondo blanco */
+}
+
+/* Sections */
+.section {
+ padding: 60px 100px;
+ text-align: center;
+}
+
+/* Features */
+.features {
+ display: flex;
+ justify-content: space-around;
+ padding: 60px 100px;
+ gap: 30px;
+}
+
+.features div {
+ max-width: 250px;
+ background: rgba(255,255,255,0.05);
+ padding: 20px;
+ border-radius: 10px;
+ backdrop-filter: blur(5px);
+}
+
+/* CTA */
+.cta {
+ text-align: center;
+ padding: 60px;
+ background: linear-gradient(180deg, #000, #1A120B);
+}
+
+.cta button {
+ margin-top: 20px;
+ padding: 12px 25px;
+ background: #F4A261;
+ border: none;
+ border-radius: 8px;
+ cursor: pointer;
+}

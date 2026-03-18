@@ -3,6 +3,7 @@ import Navbar from "../components/SearchSongs"
 import SearchSongs from "../components/SearchSongs"
 import Trending from "../components/Trending"
 import Player from "../components/Player"
+import "../styles/dashboard.css"
 
 function Dashboard() {
   const [currentSong, setCurrentSong] = useState(null);

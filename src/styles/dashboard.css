@@ -1,6 +1,7 @@
 /* Dashboard styles */
 
 .dashboard {
+ background: radial-gradient(circle at top, #3E2A1C, #000);
  max-width: 1200px;
  margin: auto;
  padding: 20px;
