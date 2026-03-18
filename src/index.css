@@ -5,14 +5,45 @@
     --text-color: #F1E3C6;
     --card-border: #8B5E3C;
     --white: #FFFFFF;
+    --black: #000000;
 }
 
 body {
-    background-color: var(--secondary-color);
+    background-color: linear-gradient(180deg, var(--secondary-color), var(--black));
     color: var(--text-color);
     font-family: 'Georgia', serif;
     margin: 0;
 }
+
+/* NavBar */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(0,0,0,0.6);
+    border-bottom: 1px solid var(--card-border);
+}
+
+logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--primary-color)
+}
+
+/* Fixed Player */
+
+.player-fixed{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--black);
+    padding: 10px;
+    border-top: 1px solid var(--card-border);
+}
+
+/* Dashboard */
 
 .dashboard {
     max-width: 1200px;
@@ -48,8 +79,6 @@ body {
     height: 80px;
     border-radius: 8px;
 }
-
-
 
 h1 {
     font-size: 36px;

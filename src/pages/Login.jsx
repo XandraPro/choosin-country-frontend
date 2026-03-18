@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { loginUser } from "../context/AuthContext";
 
 function Login() {
   const { login } = useContext(AuthContext);
@@ -23,8 +22,7 @@ function Login() {
     setError("");
 
     try {
-      const data = await loginUser(formData);
-      login(data.token);
+      await login(formData.email, formData.password);
       navigate("/dashboard");
     } catch (err) {
       console.error(err);

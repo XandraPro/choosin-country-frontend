@@ -1,17 +1,18 @@
+import { useState } from "react";
+import Navbar from "../components/SearchSongs"
 import SearchSongs from "../components/SearchSongs"
 import Trending from "../components/Trending"
-import { useAuth } from "../context/useAuth"
+import Player from "../components/Player"
 
 function Dashboard() {
-  const { logout } = useAuth;
+  const [currentSong, setCurrentSong] = useState(null);
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <button onClick={logout}>
-        Logout
-        </button>
-        <Trending />
-        <SearchSongs />
+    <div className="dashboard">
+     <Navbar />
+     <h1>🤠 Country Music Explorer</h1>
+     <Trending setCurrentSong={setCurrentSong} />
+     <SearchSongs setCurrentSong={setCurrentSong} />
+     <Player song={currentSong} />
     </div>
   );
 }

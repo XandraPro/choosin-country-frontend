@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { saveSong} from '../services/songs.service';
 
-function SongCard({ song }) {
+function SongCard({ song , setCurrentSong }) {
 
     const[comment, setComment] = useState("");
     const[saved, setSaved] = useState(false);
@@ -10,7 +10,7 @@ function SongCard({ song }) {
         const songData = {
             title:song.trackName,
             artist: song.artisName,
-            artwork: song.artwork,
+            artwork: song.artworkUrl100,
             preview: song.previewUrl,
             comment: comment
         };
@@ -24,20 +24,13 @@ function SongCard({ song }) {
 
     return (
         <div className='song-card'>
-            <img src={song.artwork} alt={song.trackName} />
+            <img src={song.artworkUrl100} alt={song.trackName} />
             <h4>{song.trackName}</h4>
             <p>{song.artisName}</p>
-            <audio controls src={song.previewUrl}></audio>
 
-            <input>
-                type="text"
-                placeholder="Write your comment"
-                value={comment}
-                onChage(e)={(e) => setComment(e.target.value)}
-            </input>
-            <button onClick={handleSave}>
-                {saved ? "Saved" : "Save song"}
-            </button>
+            <button onClick={() => setCurrentSong(song)}>▶️ Play</button>
+            <input placeholder='Add comment' value={comment} onChange={(e) => setComment(e.target.value)} />
+            <button onClick={handleSave}> {saved ? "Saved ✅" : "Save 💾"}</button>
         </div>
     );
 }
