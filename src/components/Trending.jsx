@@ -14,7 +14,7 @@ function Trending( {setCurrentSong} ) {
     }, []);
 
     return (
-        <div>
+        <div className="trending">
             <h2 className="section-title">🔥 Top Trending Country Songs</h2>
 
             {songs.map(song => (

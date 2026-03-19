@@ -1,141 +1,28 @@
-/* Dashboard styles */
-
 .dashboard {
- background: radial-gradient(circle at top, #3E2A1C, #000);
  max-width: 1200px;
  margin: auto;
  padding: 20px;
- padding-bottom: 100px; 
+ padding-bottom: 100px;
 }
 
-/* Titles */
-h1 {
- font-size: 36px;
- color: var(--primary-color);
+/* Grid */
+.dashboard .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
 }
 
-.section-title {
- font-size: 22px;
- color: var(--primary-color);
- margin-top: 30px;
-}
-
-/* Search */
-.search-bar {
- display: flex;
- gap: 10px;
- margin-bottom: 20px;
-}
-
-.search-bar input {
- flex: 1;
- padding: 10px;
- border-radius: 6px;
- border: none;
- background-color: var(--accent-color);
- color: var(--text-color);
-}
-
-.search-bar button {
- padding: 10px 15px;
- border-radius: 6px;
- border: none;
- background-color: var(--primary-color);
- color: var(--secondary-color);
- font-weight: bold;
- cursor: pointer;
-}
-
-/* Grid songs */
-.grid {
- display: grid;
- grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
- gap: 20px;
-}
-
-/* Card song */
-.song-card {
- background-color: var(--accent-color);
- padding: 15px;
- border-radius: 10px;
- border: 1px solid var(--card-border);
- transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.song-card:hover {
- transform: scale(1.05);
- box-shadow: 0 0 15px rgba(244, 162, 97, 0.3);
-}
-
-.song-card img {
- width: 100%;
- border-radius: 8px;
-}
-
-.song-card h4 {
- margin: 10px 0 5px;
- color: var(--primary-color);
-}
-
-.song-card p {
- font-size: 14px;
-}
-
-/* Comment */
-.song-card input {
- margin-top: 8px;
- padding: 6px;
- width: 100%;
- border-radius: 6px;
- border: none;
- background-color: var(--card-border);
- color: white;
-}
-
-/* Button */
-.song-card button {
- margin-top: 8px;
- padding: 8px;
- width: 100%;
- border-radius: 6px;
- border: none;
- cursor: pointer;
- font-weight: bold;
- background-color: var(--primary-color);
- color: var(--secondary-color);
-}
-
-/* Trending */
-.topSongs {
- display: flex;
- align-items: center;
- gap: 15px;
- background: #1A120B;
- padding: 10px;
- border-radius: 10px;
- margin-bottom: 10px;
-}
-
-.topSongs img {
- width: 70px;
- height: 70px;
- border-radius: 8px;
+/* Card */
+.dashboard .song-card {
+    background-color: var(--accent-color);
+    padding: 15px;
+    border-radius: 10px;
 }
 
 /* Player */
 .player-fixed {
- position: fixed;
- bottom: 0;
- width: 100%;
- background: black;
- padding: 10px;
- display: flex;
- align-items: center;
- gap: 10px;
- border-top: 1px solid var(--card-border);
-}
-
-.player-fixed img {
- width: 50px;
- border-radius: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: var(--black);
 }

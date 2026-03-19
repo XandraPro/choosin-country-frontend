@@ -23,7 +23,7 @@ function SearchSongs({ setCurrentSong}) {
     };
 
     return (
-        <div>
+        <div className="search-section">
             <h2 className="section-title">🔍 Search Country Songs</h2>
             <div className="search-bar">
             <input

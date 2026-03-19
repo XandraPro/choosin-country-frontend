@@ -28,23 +28,23 @@ function Home() {
             <section className="section">
                 <h2>Our Mission</h2>
                 <p>
-                    We bring together the best music country experience with the pleasure of discovery new songs, personali🎧zation and community.
+                    We bring together the best music country experience with the pleasure of discovery new songs, personalization and community.
                 </p>
             </section>
 
             {/* Features */}
             <section className="features">
-                <div>
+                <div className="feature-card">
                     <h3>🎶 Song Database</h3>
                     <p>Explore thousands of country songs!</p>
                 </div>
 
-                <div>
+                <div className="feature-card">
                     <h3>📝 User Comments</h3>
                     <p>Save your favourite songs and add your owm comments!</p>
                 </div>
 
-                <div>
+                <div className="feature-card">
                     <h3>🎧 Personal Dashboard</h3>
                     <p>Manage and enjoy your music experience!</p>
                 </div>

@@ -10,7 +10,7 @@ function Dashboard() {
   return (
     <div className="dashboard">
      <Navbar />
-     <h1>🤠 Country Music Explorer</h1>
+     <h1 className="dashboard-title">🤠 Country Music Explorer</h1>
      <Trending setCurrentSong={setCurrentSong} />
      <SearchSongs setCurrentSong={setCurrentSong} />
      <Player song={currentSong} />
