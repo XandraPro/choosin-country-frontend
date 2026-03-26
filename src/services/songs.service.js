@@ -1,7 +1,7 @@
 import api from '../api/axios';
 
 export const saveSong = async (songData) => {
-    const res = await api.post('/songs', songData)
+    const res = await api.post('/songs/save', songData)
     return res.data;
 };
 
