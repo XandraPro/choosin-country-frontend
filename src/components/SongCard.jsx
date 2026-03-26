@@ -8,17 +8,18 @@ function SongCard({ song , setCurrentSong }) {
 
     const handleSave = async () => {
         const songData = {
-            title:song.trackName,
+            trackId: song.trackId,
+            songTitle: song.trackName,
             artist: song.artisName,
             artwork: song.artworkUrl100,
-            preview: song.previewUrl,
-            comment: comment
+            previewUrl: song.previewUrl
         };
         try {
-            await saveSong(songData);
+            const res = await saveSong(songData);
+            console.log("Saved", res);
             setSaved(true);
         } catch (error) {
-            console.error("Error saving song:", error);
+            console.error("Error", error.response?.data || error);
         }
     };
 
@@ -29,7 +30,7 @@ function SongCard({ song , setCurrentSong }) {
             <p>{song.artisName}</p>
 
             <button onClick={() => setCurrentSong(song)}>▶️ Play</button>
-            <input placeholder='Add comment' value={comment} onChange={(e) => setComment(e.target.value)} />
+            <input type="text" placeholder='Add comment' value={comment} onChange={(e) => setComment(e.target.value)} />
             <button onClick={handleSave}> {saved ? "Saved ✅" : "Save 💾"}</button>
         </div>
     );
