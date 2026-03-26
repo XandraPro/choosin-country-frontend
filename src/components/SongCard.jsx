@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { saveSong} from '../services/songs.service';
+import { createComment } from '../services/comment.service';
 
 function SongCard({ song , setCurrentSong }) {
 
@@ -7,17 +8,29 @@ function SongCard({ song , setCurrentSong }) {
     const[saved, setSaved] = useState(false);
 
     const handleSave = async () => {
-        const songData = {
+        
+        if (!comment.trim()) {
+            alert("Comment is required");
+            return;
+        }
+
+        try {
+
+        const songData = await saveSong({
             trackId: song.trackId,
             songTitle: song.trackName,
             artist: song.artisName,
             artwork: song.artworkUrl100,
             previewUrl: song.previewUrl
-        };
-        try {
-            const res = await saveSong(songData);
-            console.log("Saved", res);
-            setSaved(true);
+        });
+
+        await createComment({
+            songId: songData.data._id,
+            text: comment
+        });
+    
+        setSaved(true);
+
         } catch (error) {
             console.error("Error", error.response?.data || error);
         }
@@ -35,4 +48,5 @@ function SongCard({ song , setCurrentSong }) {
         </div>
     );
 }
+
 export default SongCard;
