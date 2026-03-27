@@ -19,9 +19,9 @@ function Trending( {setCurrentSong} ) {
 
             {songs.map(song => (
                 <div className="topSongs" key={song.id}>
-                    <img src={song.artwork} />
+                    <img src={song.artwork} alt={song.songTitle}/>
                     <div>
-                        <p>{song.title}</p>
+                        <p>{song.songTitle}</p>
                         <p>{song.artist}</p>
                     </div>
                     <button onClick={() => setCurrentSong(song)}> ▶️ </button>

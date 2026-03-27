@@ -49,7 +49,7 @@ function Register() {
 
        <input
          type="email"
-         placeholder="Email"i
+         placeholder="Email"
          required
          onChange={(e) =>
            setForm({ ...form, email: e.target.value })

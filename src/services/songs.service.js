@@ -5,8 +5,8 @@ export const saveSong = async (songData) => {
     return res.data;
 };
 
-export const playSong = (id) => {
-    return api.get(`/songs/${id}/play`);
+export const playSong = (trackId) => {
+    return api.post(`/songs/${trackId}/play`);
 };
 
 export const getTrendingSongs = () => {

@@ -40,7 +40,7 @@ function SongCard({ song , setCurrentSong }) {
         <div className='song-card'>
             <img src={song.artworkUrl100} alt={song.trackName} />
             <h4>{song.trackName}</h4>
-            <p>{song.artisName}</p>
+            <p>{song.artistName}</p>
 
             <button onClick={() => setCurrentSong(song)}>▶️ Play</button>
             <input type="text" placeholder='Add comment' value={comment} onChange={(e) => setComment(e.target.value)} />

@@ -1,7 +1,7 @@
 import { useAuth} from '../context/useAuth'
 
 function Navbar() {
-    const { logout } = useAuth;
+    const { logout } = useAuth();
 
     return (
         <div className='navbar'>

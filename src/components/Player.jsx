@@ -5,9 +5,9 @@ function Player({ song }) {
 
     return (
         <div className="player-fixed">
-            <img src={song.artworkUrl100 || song.artwork} />
+            <img src={song.artworkUrl100 || song.artwork} alt={song.trackName || song.songTitle} />
             <div>
-                <p>{song.trackName || song.title}</p>
+                <p>{song.trackName || song.songTitle}</p>
                 <p>{song.artistName || song.artist}</p>
             </div>
             <audio controls src={song.previewUrl || song.preview}></audio>
