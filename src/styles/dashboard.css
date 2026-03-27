@@ -76,3 +76,24 @@
   font-size: 13px;
   margin: 4px 0;
 }
+
+/* Delete */
+.song-card button + button {
+  margin-top: 8px;
+}
+
+.comments-list {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.comments-list h5 {
+  margin-bottom: 6px;
+  color: var(--primary-color);
+}
+
+.comments-list p {
+  font-size: 13px;
+  margin: 4px 0;
+}
