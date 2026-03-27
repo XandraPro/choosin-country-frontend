@@ -1,52 +1,86 @@
-import { useState } from 'react';
-import { saveSong} from '../services/songs.service';
-import { createComment } from '../services/comment.service';
+import { useState } from "react";
+import { saveSong } from "../services/songs.service";
+import {
+  createComment,
+  getCommentsBySong,
+} from "../services/comment.service";
 
-function SongCard({ song , setCurrentSong }) {
+function SongCard({ song, setCurrentSong }) {
+  const [comment, setComment] = useState("");
+  const [saved, setSaved] = useState(false);
+  const [comments, setComments] = useState([]);
 
-    const[comment, setComment] = useState("");
-    const[saved, setSaved] = useState(false);
+  const loadComments = async (currentSongId) => {
+    if (!currentSongId) return;
 
-    const handleSave = async () => {
-        
-        if (!comment.trim()) {
-            alert("Comment is required");
-            return;
-        }
+    try {
+      const res = await getCommentsBySong(currentSongId);
+      setComments(res.data);
+    } catch (error) {
+      console.error("Load comments error:", error.response?.data || error);
+    }
+  };
 
-        try {
+  const handleSave = async () => {
+    if (!comment.trim()) {
+      alert("Comment is required");
+      return;
+    }
 
-        const songData = await saveSong({
-            trackId: song.trackId,
-            songTitle: song.trackName,
-            artist: song.artistName,
-            artwork: song.artworkUrl100,
-            previewUrl: song.previewUrl
-        });
+    try {
+      const songRes = await saveSong({
+        trackId: song.trackId,
+        songTitle: song.trackName,
+        artist: song.artistName,
+        artwork: song.artworkUrl100,
+        previewUrl: song.previewUrl,
+      });
 
-        await createComment({
-            songId: songData.data._id,
-            text: comment
-        });
-    
-        setSaved(true);
+      const savedSongId = songRes.data._id;
 
-        } catch (error) {
-            console.error("Error", error.response?.data || error);
-        }
-    };
+      await createComment({
+        songId: savedSongId,
+        text: comment,
+      });
 
-    return (
-        <div className='song-card'>
-            <img src={song.artworkUrl100} alt={song.trackName} />
-            <h4>{song.trackName}</h4>
-            <p>{song.artistName}</p>
+      setSaved(true);
+      setComment("");
 
-            <button onClick={() => setCurrentSong(song)}>▶️ Play</button>
-            <input type="text" placeholder='Add comment' value={comment} onChange={(e) => setComment(e.target.value)} />
-            <button onClick={handleSave}> {saved ? "Saved ✅" : "Save 💾"}</button>
+      await loadComments(savedSongId);
+    } catch (error) {
+      console.error("Error:", error.response?.data || error);
+    }
+  };
+
+  return (
+    <div className="song-card">
+      <img src={song.artworkUrl100} alt={song.trackName} />
+      <h4>{song.trackName}</h4>
+      <p>{song.artistName}</p>
+
+      <button onClick={() => setCurrentSong(song)}>▶️ Play</button>
+
+      <input
+        type="text"
+        placeholder="Add comment"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+      />
+
+      <button onClick={handleSave}>
+        {saved ? "Saved ✅" : "Save 💾"}
+      </button>
+
+      {comments.length > 0 && (
+        <div className="comments-list">
+          <h5>Comments</h5>
+          {comments.map((c) => (
+            <p key={c._id}>💬 {c.text}</p>
+          ))}
         </div>
-    );
+      )}
+    </div>
+  );
 }
 
 export default SongCard;
