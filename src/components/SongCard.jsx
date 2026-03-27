@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { saveSong } from "../services/songs.service";
-import { createComment, getCommentsBySong } from "../services/comment.service";
+import {
+  createComment,
+  getCommentsBySong,
+} from "../services/comment.service";
 
 function SongCard({ song, setCurrentSong }) {
   const [comment, setComment] = useState("");
@@ -11,8 +14,8 @@ function SongCard({ song, setCurrentSong }) {
     if (!currentSongId) return;
 
     try {
-      const res = await getCommentsBySong(currentSongId);
-      setComments(res.data);
+      const commentsData = await getCommentsBySong(currentSongId);
+      setComments(commentsData);
     } catch (error) {
       console.error("Load comments error:", error.response?.data || error);
     }
@@ -45,7 +48,7 @@ function SongCard({ song, setCurrentSong }) {
 
       await loadComments(savedSongId);
     } catch (error) {
-      console.error("Error:", error.response?.data || error);
+      console.error("Save flow error:", error.response?.data || error);
     }
   };
 
