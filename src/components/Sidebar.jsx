@@ -8,7 +8,6 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <h2 className="logo">🤠 Country</h2>
-
       <button onClick={() => navigate("/")}>🏠 Home</button>
       <button onClick={() => navigate("/dashboard")}>🎵 Dashboard</button>
       <button onClick={logout}>🚪 Logout</button>
