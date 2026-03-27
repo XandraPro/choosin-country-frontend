@@ -66,7 +66,13 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
               <p>{song.artist}</p>
 
               <button onClick={() => setCurrentSong(song)}>▶️ Play</button>
-              <button onClick={() => handleDelete(song._id)}>🗑 Delete</button>
+
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(song._id)}
+              >
+                🗑 Delete
+              </button>
 
               {song.comments?.length > 0 && (
                 <div className="comments-list">

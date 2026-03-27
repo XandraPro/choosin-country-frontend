@@ -60,6 +60,24 @@
  border-top: 1px solid var(--card-border);
 }
 
+/* Delete */
+
+.delete-btn {
+  margin-top: 8px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #8b0000;
+  color: white;
+}
+
+.song-card button + button {
+  margin-top: 8px;
+}
+
 /* Comments */
 .comments-list {
   margin-top: 10px;
@@ -75,11 +93,6 @@
 .comments-list p {
   font-size: 13px;
   margin: 4px 0;
-}
-
-/* Delete */
-.song-card button + button {
-  margin-top: 8px;
 }
 
 .comments-list {
