@@ -44,15 +44,15 @@ function Trending({ setCurrentSong }) {
             <p>{song.artist}</p>
 
             {song.comments?.length > 0 && (
-              <div className="song-comments">
-                {song.comments.map((comment) => (
+              <div className="comments-list">
+                {song.comments.slice(0, 1).map((comment) => (
                   <p key={comment._id}>💬 {comment.text}</p>
                 ))}
               </div>
             )}
           </div>
 
-          <button onClick={() => setCurrentSong(song)}>▶️</button>
+          <button onClick={() => setCurrentSong(song)}>▶ Play</button>
         </div>
       ))}
     </div>
