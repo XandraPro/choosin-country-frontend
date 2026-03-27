@@ -59,3 +59,20 @@
  gap: 10px;
  border-top: 1px solid var(--card-border);
 }
+
+/* Comments */
+.comments-list {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.comments-list h5 {
+  margin-bottom: 6px;
+  color: var(--primary-color);
+}
+
+.comments-list p {
+  font-size: 13px;
+  margin: 4px 0;
+}

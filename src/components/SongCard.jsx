@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { saveSong } from "../services/songs.service";
-import { createComment, getCommentsBySong } from "../../../choosin-country-backend/src/services/comment.service";
+import { createComment, getCommentsBySong } from "../services/comment.service";
 
 function SongCard({ song, setCurrentSong }) {
   const [comment, setComment] = useState("");

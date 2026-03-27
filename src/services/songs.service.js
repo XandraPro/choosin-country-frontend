@@ -16,3 +16,8 @@ export const getRanking = async () => {
 export const playSong = async (trackId) => {
   return api.post(`/songs/${trackId}/play`);
 };
+
+export const getMySongs = async () => {
+  const res = await api.get("/songs/my-songs");
+  return res.data;
+};
