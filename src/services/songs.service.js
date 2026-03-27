@@ -1,18 +1,18 @@
-import api from '../api/axios';
+import api from "../api/axios";
 
 export const saveSong = async (songData) => {
-    const res = await api.post('/songs/save', songData)
-    return res.data;
+  const res = await api.post("/songs/save", songData);
+  return res.data;
 };
 
-export const playSong = (trackId) => {
-    return api.post(`/songs/${trackId}/play`);
+export const getTrendingSongs = async () => {
+  return api.get("/songs/trending");
 };
 
-export const getTrendingSongs = () => {
-    return api.get('/songs/trending');
+export const getRanking = async () => {
+  return api.get("/songs/ranking");
 };
 
-export const getRanking = () => {
-    return api.get('/songs/ranking');
+export const playSong = async (trackId) => {
+  return api.post(`/songs/${trackId}/play`);
 };
