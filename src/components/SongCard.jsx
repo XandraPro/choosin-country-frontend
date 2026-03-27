@@ -19,7 +19,7 @@ function SongCard({ song , setCurrentSong }) {
         const songData = await saveSong({
             trackId: song.trackId,
             songTitle: song.trackName,
-            artist: song.artisName,
+            artist: song.artistName,
             artwork: song.artworkUrl100,
             previewUrl: song.previewUrl
         });
