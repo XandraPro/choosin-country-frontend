@@ -18,7 +18,7 @@ function Trending( {setCurrentSong} ) {
             <h2 className="section-title">🔥 Top Trending Country Songs</h2>
 
             {songs.map(song => (
-                <div className="topSongs" key={song.id}>
+                <div className="topSongs" key={song._id}>
                     <img src={song.artwork} alt={song.songTitle}/>
                     <div>
                         <p>{song.songTitle}</p>
