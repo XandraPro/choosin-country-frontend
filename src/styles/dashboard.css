@@ -224,6 +224,21 @@
   }
 }
 
+@keyframes pulseHeart {
+  0% {
+    transform: scale(0.9);
+  }
+  40% {
+    transform: scale(1.2);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .favorite-card {
   border: 1px solid rgba(244, 162, 97, 0.28);
   box-shadow:
@@ -299,6 +314,7 @@
 }
 .song-card  {
   width: 100%;
+  transform-origin: center;
 }
 
 .song-card button:first-of-type {

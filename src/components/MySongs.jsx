@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   getMySongs,
   deleteMySong,
@@ -99,10 +100,10 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
         const updated = prev.map((song) =>
           song._id === songId
             ? {
-              ...song,
-              isFavorite: !song.isFavorite,
-              savesCount: (song.savesCount || 0) + 1,
-            }
+                ...song,
+                isFavorite: !song.isFavorite,
+                savesCount: (song.savesCount || 0) + 1,
+              }
             : song
         );
 
@@ -126,9 +127,11 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
       {songs.length === 0 ? (
         <p>You have no saved songs yet.</p>
       ) : (
-        <div className="grid">
+        <motion.div layout className="grid">
           {songs.map((song) => (
-            <div
+            <motion.div
+              layout
+              transition={{ type: "spring", stiffness: 320, damping: 28 }}
               className={`song-card ${song.isFavorite ? "favorite-card" : ""}`}
               key={song._id}
             >
@@ -142,7 +145,9 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
               <img src={song.artwork} alt={song.songTitle} />
               <h4>{song.songTitle}</h4>
               <p>{song.artist}</p>
-              {song.isFavorite && <p className="favorite-label">🔥 Favorite song!</p>}
+              {song.isFavorite && (
+                <p className="favorite-label">⭐ In your favorites</p>
+              )}
 
               <button onClick={() => setCurrentSong(song)}>
                 ▶ Play / Close
@@ -169,7 +174,9 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
                             onChange={(e) => setEditedText(e.target.value)}
                           />
                           <button
-                            onClick={() => handleSaveComment(comment._id, song._id)}
+                            onClick={() =>
+                              handleSaveComment(comment._id, song._id)
+                            }
                           >
                             Save edit
                           </button>
@@ -186,9 +193,9 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
                   ))}
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );
