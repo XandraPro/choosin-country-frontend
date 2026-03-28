@@ -65,7 +65,7 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
               <h4>{song.songTitle}</h4>
               <p>{song.artist}</p>
 
-              <button onClick={() => setCurrentSong(song)}>▶️ Play</button>
+              <button onClick={() => setCurrentSong(song)}>▶️ Play / Close</button>
 
               <button
                 className="delete-btn"

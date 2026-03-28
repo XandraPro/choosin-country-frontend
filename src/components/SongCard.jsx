@@ -61,7 +61,7 @@ function SongCard({ song, setCurrentSong, setRefreshMySongs }) {
       <h4>{song.trackName}</h4>
       <p>{song.artistName}</p>
 
-      <button onClick={() => setCurrentSong(song)}>▶️ Play</button>
+      <button onClick={() => setCurrentSong(song)}>▶ Play / Close</button>
 
       <input
         type="text"

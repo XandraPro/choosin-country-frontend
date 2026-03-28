@@ -52,7 +52,7 @@ function Trending({ setCurrentSong }) {
             )}
           </div>
 
-          <button onClick={() => setCurrentSong(song)}>▶ Play</button>
+          <button onClick={() => setCurrentSong(song)}>▶ Play/ Close</button>
         </div>
       ))}
     </div>
