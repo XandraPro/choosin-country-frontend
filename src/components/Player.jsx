@@ -15,7 +15,12 @@ function Player({ song, onClose }) {
         <p>{song.artistName || song.artist}</p>
       </div>
 
-      <audio controls autoPlay src={song.previewUrl}></audio>
+      <audio
+        controls
+        autoPlay
+        src={song.previewUrl}
+        onEnded={onClose}
+      />
 
       <button className="player-close-btn" onClick={onClose}>
         ✕

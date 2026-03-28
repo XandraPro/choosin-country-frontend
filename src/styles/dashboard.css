@@ -335,6 +335,90 @@
   border-color: transparent;
 }
 
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.stats-card {
+  background: linear-gradient(180deg, #392216 0%, #24150d 100%);
+  border: 1px solid rgba(244, 162, 97, 0.12);
+  border-radius: 18px;
+  padding: 24px;
+  text-align: center;
+}
+
+.stats-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.stats-card p {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #f7e6cf;
+}
+
+.comment-item {
+  margin-bottom: 10px;
+}
+
+.comment-item button {
+  margin-top: 6px;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.player-close-btn {
+  margin-left: 10px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #2a1a11;
+  color: #f4dfc4;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.delete-btn {
+  background: linear-gradient(135deg, #b81717, #8b0000) !important;
+  color: white !important;
+}
+
+.dashboard-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(244, 162, 97, 0.16);
+  background: #24150d;
+  color: #f4dfc4;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.tab-btn:hover {
+  background: rgba(244, 162, 97, 0.08);
+  border-color: rgba(244, 162, 97, 0.28);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #f4a261, #d97b2d);
+  color: #1a120b;
+  border-color: transparent;
+}
+
 .player-info {
   display: flex;
   flex-direction: column;
@@ -436,4 +520,35 @@
     width: 100%;
     max-width: 100%;
   }
+}
+
+.stats-tab {
+  margin-top: 20px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.stats-card {
+  background: linear-gradient(180deg, #392216 0%, #24150d 100%);
+  border: 1px solid rgba(244, 162, 97, 0.12);
+  border-radius: 18px;
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+}
+
+.stats-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.stats-card p {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #f7e6cf;
 }

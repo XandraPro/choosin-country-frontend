@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
-import { getMySongs, deleteMySong } from "../services/songs.service";
-import { getCommentsBySong } from "../services/comment.service";
+import {
+  getMySongs,
+  deleteMySong,
+  voteSong,
+} from "../services/songs.service";
+import {
+  getCommentsBySong,
+  updateComment,
+} from "../services/comment.service";
 
 function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [editedText, setEditedText] = useState("");
 
   const loadMySongs = async () => {
     try {
@@ -38,12 +47,44 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
     try {
       await deleteMySong(songId);
       setSongs((prev) => prev.filter((song) => song._id !== songId));
-
-      if (setRefreshMySongs) {
-        setRefreshMySongs((prev) => !prev);
-      }
+      setRefreshMySongs((prev) => !prev);
     } catch (error) {
       console.error("Delete song error:", error.response?.data || error);
+    }
+  };
+
+  const handleEditComment = (comment) => {
+    setEditingCommentId(comment._id);
+    setEditedText(comment.text);
+  };
+
+  const handleSaveComment = async (commentId, songId) => {
+    if (!editedText.trim()) return;
+
+    try {
+      await updateComment(commentId, editedText);
+
+      const comments = await getCommentsBySong(songId);
+
+      setSongs((prev) =>
+        prev.map((song) =>
+          song._id === songId ? { ...song, comments } : song
+        )
+      );
+
+      setEditingCommentId(null);
+      setEditedText("");
+    } catch (error) {
+      console.error("Update comment error:", error.response?.data || error);
+    }
+  };
+
+  const handleVote = async (songId) => {
+    try {
+      await voteSong(songId);
+      await loadMySongs();
+    } catch (error) {
+      console.error("Vote error:", error.response?.data || error);
     }
   };
 
@@ -65,7 +106,13 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
               <h4>{song.songTitle}</h4>
               <p>{song.artist}</p>
 
-              <button onClick={() => setCurrentSong(song)}>▶️ Play / Close</button>
+              <button onClick={() => setCurrentSong(song)}>
+                ▶ Play / Close
+              </button>
+
+              <button onClick={() => handleVote(song._id)}>
+                ❤️ Like
+              </button>
 
               <button
                 className="delete-btn"
@@ -77,8 +124,33 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
               {song.comments?.length > 0 && (
                 <div className="comments-list">
                   <h5>Comments</h5>
+
                   {song.comments.map((comment) => (
-                    <p key={comment._id}>💬 {comment.text}</p>
+                    <div key={comment._id} className="comment-item">
+                      {editingCommentId === comment._id ? (
+                        <>
+                          <input
+                            type="text"
+                            value={editedText}
+                            onChange={(e) => setEditedText(e.target.value)}
+                          />
+                          <button
+                            onClick={() =>
+                              handleSaveComment(comment._id, song._id)
+                            }
+                          >
+                            Save edit
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <p>💬 {comment.text}</p>
+                          <button onClick={() => handleEditComment(comment)}>
+                            ✏ Edit
+                          </button>
+                        </>
+                      )}
+                    </div>
                   ))}
                 </div>
               )}

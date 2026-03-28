@@ -26,3 +26,8 @@ export const deleteMySong = async (songId) => {
   const res = await api.delete(`/songs/my-songs/${songId}`);
   return res.data;
 };
+
+export const voteSong = async (songId) => {
+  const res = await api.post(`/songs/${songId}/vote`);
+  return res.data;
+};
