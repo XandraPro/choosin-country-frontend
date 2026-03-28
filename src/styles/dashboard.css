@@ -652,3 +652,21 @@
   font-weight: 800;
   color: #f7e6cf;
 }
+
+.events-section {
+  margin-top: 10px;
+}
+
+.event-link-btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  padding: 11px 14px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(135deg, #f4a261, #d97b2d);
+  color: #1a120b;
+}

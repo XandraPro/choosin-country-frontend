@@ -5,6 +5,7 @@ import Trending from "../components/Trending";
 import MySongs from "../components/MySongs";
 import StatsTab from "../components/StatsTab";
 import Player from "../components/Player";
+import CountryEvents from "../components/CountryEvents";
 import { getMySongs, getTrendingSongs } from "../services/songs.service";
 import "../styles/dashboard.css";
 
@@ -76,6 +77,13 @@ function Dashboard() {
           </button>
 
           <button
+            className={activeTab === "events" ? "tab-btn active" : "tab-btn"}
+            onClick={() => setActiveTab("events")}
+          >
+            🎤 Events
+          </button>
+
+          <button
             className={activeTab === "stats" ? "tab-btn active" : "tab-btn"}
             onClick={() => setActiveTab("stats")}
           >
@@ -104,6 +112,8 @@ function Dashboard() {
             setRefreshMySongs={setRefreshMySongs}
           />
         )}
+
+        {activeTab === "events" && <CountryEvents />}
 
         {activeTab === "stats" && <StatsTab />}
       </div>

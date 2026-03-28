@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import CountryEvents from "../components/CountryEvents";
 import "../styles/home.css";
 import logo from "../assets/logo.png";
 
@@ -51,6 +52,8 @@ function Home() {
             <p>Manage and enjoy your music experience in one place.</p>
           </div>
         </section>
+
+        <CountryEvents />
 
         <section className="cta">
           <h2>Join Choosin' Country Today!</h2>

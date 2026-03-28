@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import {
   getMySongs,
   deleteMySong,
@@ -127,9 +127,9 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
       {songs.length === 0 ? (
         <p>You have no saved songs yet.</p>
       ) : (
-        <motion.div layout className="grid">
+        <Motion.div layout className="grid">
           {songs.map((song) => (
-            <motion.div
+            <Motion.div
               layout
               transition={{ type: "spring", stiffness: 320, damping: 28 }}
               className={`song-card ${song.isFavorite ? "favorite-card" : ""}`}
@@ -193,9 +193,9 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
                   ))}
                 </div>
               )}
-            </motion.div>
+            </Motion.div>
           ))}
-        </motion.div>
+        </Motion.div>
       )}
     </div>
   );
