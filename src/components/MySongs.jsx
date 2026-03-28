@@ -24,14 +24,26 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
         savedSongs.map(async (song) => {
           try {
             const comments = await getCommentsBySong(song._id);
-            return { ...song, comments };
+            return {
+              ...song,
+              comments,
+              isFavorite: song.savesCount > 1,
+            };
           } catch {
-            return { ...song, comments: [] };
+            return {
+              ...song,
+              comments: [],
+              isFavorite: song.savesCount > 1,
+            };
           }
         })
       );
 
-      setSongs(songsWithComments);
+      const sortedSongs = [...songsWithComments].sort(
+        (a, b) => Number(b.isFavorite) - Number(a.isFavorite)
+      );
+
+      setSongs(sortedSongs);
     } catch (error) {
       console.error("MySongs error:", error.response?.data || error);
     } finally {
@@ -82,7 +94,22 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
   const handleVote = async (songId) => {
     try {
       await voteSong(songId);
-      await loadMySongs();
+
+      setSongs((prev) => {
+        const updated = prev.map((song) =>
+          song._id === songId
+            ? {
+              ...song,
+              isFavorite: !song.isFavorite,
+              savesCount: (song.savesCount || 0) + 1,
+            }
+            : song
+        );
+
+        return [...updated].sort(
+          (a, b) => Number(b.isFavorite) - Number(a.isFavorite)
+        );
+      });
     } catch (error) {
       console.error("Vote error:", error.response?.data || error);
     }
@@ -101,17 +128,24 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
       ) : (
         <div className="grid">
           {songs.map((song) => (
-            <div className="song-card" key={song._id}>
+            <div
+              className={`song-card ${song.isFavorite ? "favorite-card" : ""}`}
+              key={song._id}
+            >
+              <button
+                className={`favorite-heart ${song.isFavorite ? "active" : ""}`}
+                onClick={() => handleVote(song._id)}
+              >
+                {song.isFavorite ? "❤️" : "🤍"}
+              </button>
+
               <img src={song.artwork} alt={song.songTitle} />
               <h4>{song.songTitle}</h4>
               <p>{song.artist}</p>
+              {song.isFavorite && <p className="favorite-label">🔥 Favorite song!</p>}
 
               <button onClick={() => setCurrentSong(song)}>
                 ▶ Play / Close
-              </button>
-
-              <button onClick={() => handleVote(song._id)}>
-                ❤️ Like
               </button>
 
               <button
@@ -135,9 +169,7 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
                             onChange={(e) => setEditedText(e.target.value)}
                           />
                           <button
-                            onClick={() =>
-                              handleSaveComment(comment._id, song._id)
-                            }
+                            onClick={() => handleSaveComment(comment._id, song._id)}
                           >
                             Save edit
                           </button>
