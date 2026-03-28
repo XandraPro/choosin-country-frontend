@@ -21,7 +21,8 @@ function CountryEvents() {
       try {
         setLoading(true);
         const data = await getCountryEvents(countryCode);
-        setEvents(data);
+        console.log("EVENTS:", data);
+        setEvents(data || []);
       } catch (error) {
         console.error("Events load error:", error.response?.data || error);
         setEvents([]);
