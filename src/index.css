@@ -1,0 +1,30 @@
+:root {
+  --primary-color: #f4a261;
+  --secondary-color: #1a120b;
+  --accent-color: #4b2e1e;
+  --text-color: #f1e3c6;
+  --card-border: #8b5e3c;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--secondary-color);
+  color: var(--text-color);
+  font-family: Georgia, serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}

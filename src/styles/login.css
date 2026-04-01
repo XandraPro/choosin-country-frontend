@@ -1,0 +1,26 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: var(--black);
+}
+
+.login form {
+    background: var(--accent-color);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.login input {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 250px;
+}
+
+.error {
+    color: #ff6b6b;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
