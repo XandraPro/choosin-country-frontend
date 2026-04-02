@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import "../styles/login.css"
+import "../styles/login.css";
 
 function Login() {
   const { login } = useContext(AuthContext);
@@ -9,13 +9,22 @@ function Login() {
 
   const [formData, setFormData] = useState({
     email: "",
-    password: ""
-  })
+    password: "",
+  });
+
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(formData.email, formData.password)
-    navigate("/dashboard");
+    setError("");
+
+    try {
+      await login(formData.email, formData.password);
+      navigate("/dashboard");
+    } catch (err) {
+      console.error(err);
+      setError("Invalid email or password");
+    }
   };
 
   return (
@@ -23,9 +32,36 @@ function Login() {
       <form className="login-form" onSubmit={handleSubmit}>
         <h2>Login</h2>
 
-        <input type="email" name="email" placeholder="Email" onChange={(e) => (setFormData({ ...formData, email: e.target.value }))} />
-        <input type="password" name="password" placeholder="Password" onChange={(e) => (setFormData({ ...formData, password: e.target.value }))} />
+        {error && <p className="error">{error}</p>}
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          value={formData.email}
+          onChange={(e) =>
+            setFormData({ ...formData, email: e.target.value })
+          }
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          value={formData.password}
+          onChange={(e) =>
+            setFormData({ ...formData, password: e.target.value })
+          }
+        />
+
         <button type="submit">Login</button>
+
+        <p className="auth-switch">
+          Don&apos;t have an account?{" "}
+          <Link to="/register">Sign up</Link>
+        </p>
       </form>
     </div>
   );
