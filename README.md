@@ -1,16 +1,79 @@
-# React + Vite
+# 🎨 Choosin Country Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend application for Choosin Country.  
+Built with React, it allows users to discover country songs, save favourites, add comments and explore live events.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live App
 
-## React Compiler
+[https://TU-FRONTEND-URL.vercel.app](https://TU-FRONTEND-URL.vercel.app)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Axios
+- CSS
+- Vite
+
+---
+
+## ⚙️ Installation
+
+Clone the repository and navigate to the backend directory:
+
+cd choosin-country-frontend
+
+## ⚙️ Install dependencies
+
+npm install
+
+## Run the server
+
+npm run dev
+
+## The server will run at
+
+<http://localhost:5173>
+
+## Make sure the backend is running or deployed
+
+<https://choosin-country-backend.onrender.com>
+
+---
+
+## Features
+
+- User authentication (login/register)
+- Search Country songs
+- Save songs to personal collection
+- Add and edit comments
+- View trending songs and ranking
+- Browse country concerts and festivals
+- Filter events by country, artist, city and type
+
+---
+
+## 📦 Project Structure
+
+src/
+├── components/
+├── pages/
+├── services/
+├── context/
+├── api/
+
+---
+
+## 📌 Notes
+
+- Backend must be running for full functionality
+- Do not commit .env files
+
+⸻
+
+## 👩‍💻 Author
+
+[Sandra Minguez Pazos](https://github.com/XandraPro)
