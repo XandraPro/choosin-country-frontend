@@ -157,7 +157,7 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
                 className="delete-btn"
                 onClick={() => handleDelete(song._id)}
               >
-                🗑 Delete
+                🗑️ Delete
               </button>
 
               {song.comments?.length > 0 && (
