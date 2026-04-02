@@ -35,7 +35,7 @@ function SearchSongs({ setCurrentSong, setRefreshMySongs }) {
           placeholder="Search artist or song..."
         />
 
-        <button onClick={handleSearch}>
+        <button type="submit" onClick={handleSearch}>
           {loading ? "Searching..." : "Search"}
         </button>
       </div>
