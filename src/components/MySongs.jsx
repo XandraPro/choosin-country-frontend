@@ -166,48 +166,40 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
                 <div className="comments-list">
                   <h5>Comments</h5>
 
-                  {song.comments?.length > 0 && (
-                    <div className="comments-list">
-                      <h5>Comments</h5>
+                  {song.comments.map((comment) => {
+                    const isOwnComment = comment.user?._id === user?._id;
 
-                      {song.comments.map((comment) => {
-                        const isOwnComment = comment.user?._id === user?._id;
+                    return (
+                      <div
+                        key={comment._id}
+                        className={`comment-item ${isOwnComment ? "own-comment" : ""}`}
+                      >
+                        <p>
+                          <strong>{isOwnComment ? "You" : comment.user?.email}</strong>:{" "}
+                          {comment.text}
+                        </p>
 
-                        return (
-                          <div
-                            key={comment._id}
-                            className={`comment-item ${isOwnComment ? "own-comment" : ""}`}
-                          >
-                            <p>
-                              <strong>
-                                {isOwnComment ? "You" : comment.user?.email || "User"}
-                              </strong>
-                              : {comment.text}
-                            </p>
-
-                            {isOwnComment && editingCommentId === comment._id ? (
-                              <>
-                                <input
-                                  type="text"
-                                  value={editedText}
-                                  onChange={(e) => setEditedText(e.target.value)}
-                                />
-                                <button onClick={() => handleSaveComment(comment._id, song._id)}>
-                                  Save edit
-                                </button>
-                              </>
-                            ) : (
-                              isOwnComment && (
-                                <button onClick={() => handleEditComment(comment)}>
-                                  ✏ Edit
-                                </button>
-                              )
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                  )}
+                        {isOwnComment && editingCommentId === comment._id ? (
+                          <>
+                            <input
+                              type="text"
+                              value={editedText}
+                              onChange={(e) => setEditedText(e.target.value)}
+                            />
+                            <button onClick={() => handleSaveComment(comment._id, song._id)}>
+                              Save edit
+                            </button>
+                          </>
+                        ) : (
+                          isOwnComment && (
+                            <button onClick={() => handleEditComment(comment)}>
+                              ✏ Edit
+                            </button>
+                          )
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </Motion.div>
