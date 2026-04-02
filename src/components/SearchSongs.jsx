@@ -8,26 +8,28 @@ function SearchSongs({ setCurrentSong, setRefreshMySongs }) {
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
- const handleSearch = async () => {
-  if (!query) return;
+  const handleSearch = async (e) => {
+    e.preventDefault();
 
-  try {
-    setLoading(true);
-    const results = await searchItunes(query);
-    setSongs(results);
-    setHasSearched(true); // 🔥 importante
-  } catch (error) {
-    console.error("Search error", error);
-  } finally {
-    setLoading(false);
-  }
-};
+    if (!query.trim()) return;
+
+    try {
+      setLoading(true);
+      const results = await searchItunes(query);
+      setSongs(results);
+      setHasSearched(true);
+    } catch (error) {
+      console.error("Search error", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="search-section">
       <h2 className="section-title">🔍 Search Country Songs</h2>
 
-      <div className="search-bar">
+      <form className="search-bar" onSubmit={handleSearch}>
         <input
           type="text"
           value={query}
@@ -35,30 +37,30 @@ function SearchSongs({ setCurrentSong, setRefreshMySongs }) {
           placeholder="Search artist or song..."
         />
 
-        <button type="submit" onClick={handleSearch}>
+        <button type="submit">
           {loading ? "Searching..." : "Search"}
         </button>
-      </div>
+      </form>
 
-     <div className="grid">
-  {songs.length > 0 ? (
-    songs.map((song) => (
-      <SongCard
-        key={song.trackId}
-        song={song}
-        setCurrentSong={setCurrentSong}
-        setRefreshMySongs={setRefreshMySongs}
-      />
-    ))
-  ) : (
-    !loading &&
-    hasSearched && (
-      <p style={{ gridColumn: "1 / -1" }}>
-        🤠 No country songs or artists found for "{query}"
-      </p>
-    )
-  )}
-</div>
+      <div className="grid">
+        {songs.length > 0 ? (
+          songs.map((song) => (
+            <SongCard
+              key={song.trackId}
+              song={song}
+              setCurrentSong={setCurrentSong}
+              setRefreshMySongs={setRefreshMySongs}
+            />
+          ))
+        ) : (
+          !loading &&
+          hasSearched && (
+            <p style={{ gridColumn: "1 / -1" }}>
+              🤠 No country songs or artists found for "{query}"
+            </p>
+          )
+        )}
+      </div>
     </div>
   );
 }
