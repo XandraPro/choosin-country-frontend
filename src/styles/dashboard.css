@@ -360,6 +360,21 @@
   margin-top: 6px;
 }
 
+.comment-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.own-comment {
+  background: rgba(244, 162, 97, 0.12);
+  border: 1px solid rgba(244, 162, 97, 0.3);
+}
+
+.own-comment strong {
+  color: var(--primary-color);
+}
+
 /* MY SONGS */
 .my-songs {
   margin-top: 36px;

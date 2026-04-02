@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import { motion as Motion } from "framer-motion";
 import {
   getMySongs,
@@ -15,6 +16,7 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
   const [loading, setLoading] = useState(true);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editedText, setEditedText] = useState("");
+  const { user } = useContext(AuthContext);
 
   const loadMySongs = async () => {
     try {
@@ -100,10 +102,10 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
         const updated = prev.map((song) =>
           song._id === songId
             ? {
-                ...song,
-                isFavorite: !song.isFavorite,
-                savesCount: (song.savesCount || 0) + 1,
-              }
+              ...song,
+              isFavorite: !song.isFavorite,
+              savesCount: (song.savesCount || 0) + 1,
+            }
             : song
         );
 
@@ -164,33 +166,48 @@ function MySongs({ setCurrentSong, refreshMySongs, setRefreshMySongs }) {
                 <div className="comments-list">
                   <h5>Comments</h5>
 
-                  {song.comments.map((comment) => (
-                    <div key={comment._id} className="comment-item">
-                      {editingCommentId === comment._id ? (
-                        <>
-                          <input
-                            type="text"
-                            value={editedText}
-                            onChange={(e) => setEditedText(e.target.value)}
-                          />
-                          <button
-                            onClick={() =>
-                              handleSaveComment(comment._id, song._id)
-                            }
+                  {song.comments?.length > 0 && (
+                    <div className="comments-list">
+                      <h5>Comments</h5>
+
+                      {song.comments.map((comment) => {
+                        const isOwnComment = comment.user?._id === user?._id;
+
+                        return (
+                          <div
+                            key={comment._id}
+                            className={`comment-item ${isOwnComment ? "own-comment" : ""}`}
                           >
-                            Save edit
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <p>💬 {comment.text}</p>
-                          <button onClick={() => handleEditComment(comment)}>
-                            ✏ Edit
-                          </button>
-                        </>
-                      )}
+                            <p>
+                              <strong>
+                                {isOwnComment ? "You" : comment.user?.email || "User"}
+                              </strong>
+                              : {comment.text}
+                            </p>
+
+                            {isOwnComment && editingCommentId === comment._id ? (
+                              <>
+                                <input
+                                  type="text"
+                                  value={editedText}
+                                  onChange={(e) => setEditedText(e.target.value)}
+                                />
+                                <button onClick={() => handleSaveComment(comment._id, song._id)}>
+                                  Save edit
+                                </button>
+                              </>
+                            ) : (
+                              isOwnComment && (
+                                <button onClick={() => handleEditComment(comment)}>
+                                  ✏ Edit
+                                </button>
+                              )
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
-                  ))}
+                  )}
                 </div>
               )}
             </Motion.div>
