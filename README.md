@@ -7,7 +7,7 @@ Built with React, it allows users to discover country songs, save favourites, ad
 
 ## 🚀 Live App
 
-[https://TU-FRONTEND-URL.vercel.app](https://TU-FRONTEND-URL.vercel.app)
+[https://bucolic-cendol-4682ee.netlify.app/](https://bucolic-cendol-4682ee.netlify.app/)
 
 ---
 
@@ -53,17 +53,6 @@ npm run dev
 - View trending songs and ranking
 - Browse country concerts and festivals
 - Filter events by country, artist, city and type
-
----
-
-## 📦 Project Structure
-
-src/
-├── components/
-├── pages/
-├── services/
-├── context/
-├── api/
 
 ---
 
