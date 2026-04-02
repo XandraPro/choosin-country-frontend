@@ -20,6 +20,8 @@ const POPULAR_ARTISTS = [
   "Dolly Parton",
   "Ella Langley",
   "Megan Moroney",
+  "Johnny Cash",
+  "Keith Urban",
 ];
 
 function CountryEvents() {
@@ -145,8 +147,7 @@ function CountryEvents() {
 
             const venue = event._embedded?.venues?.[0]?.name || "Venue TBA";
             const cityName = event._embedded?.venues?.[0]?.city?.name || "";
-            const countryName =
-              event._embedded?.venues?.[0]?.country?.name || "";
+            const countryName = event._embedded?.venues?.[0]?.country?.name || "";
             const date = event.dates?.start?.localDate || "Date TBA";
 
             return (

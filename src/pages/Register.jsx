@@ -48,9 +48,7 @@ function Register() {
           placeholder="Email"
           required
           value={form.email}
-          onChange={(e) =>
-            setForm({ ...form, email: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
 
         <input
@@ -58,9 +56,7 @@ function Register() {
           placeholder="Password"
           required
           value={form.password}
-          onChange={(e) =>
-            setForm({ ...form, password: e.target.value })
-          }
+          onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
 
         <input
@@ -76,8 +72,7 @@ function Register() {
         <button type="submit">Sign Up</button>
 
         <p className="auth-switch">
-          Already have an account?{" "}
-          <Link to="/login">Log in</Link>
+          Already have an account? <Link to="/login">Log in</Link>
         </p>
       </form>
     </div>

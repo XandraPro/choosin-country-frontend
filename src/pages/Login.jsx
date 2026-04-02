@@ -36,7 +36,6 @@ function Login() {
 
         <input
           type="email"
-          name="email"
           placeholder="Email"
           required
           value={formData.email}
@@ -47,7 +46,6 @@ function Login() {
 
         <input
           type="password"
-          name="password"
           placeholder="Password"
           required
           value={formData.password}
@@ -59,8 +57,7 @@ function Login() {
         <button type="submit">Login</button>
 
         <p className="auth-switch">
-          Don&apos;t have an account?{" "}
-          <Link to="/register">Sign up</Link>
+          Don&apos;t have an account? <Link to="/register">Sign up</Link>
         </p>
       </form>
     </div>
